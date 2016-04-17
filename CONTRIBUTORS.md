@@ -10,8 +10,6 @@
 * **Gerard Jacques van wyk** u14101263
   * Github: https://github.com/GerardVanWyk
   * email: gerard.wyk@gmail.com
-  * phone: 073 933 5110
-  * 
   
 * **Gian Paolo Buffo** u14446619
   * Github: https://github.com/GianPaoloBuffo
