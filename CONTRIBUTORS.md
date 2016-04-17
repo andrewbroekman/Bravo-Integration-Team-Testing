@@ -11,3 +11,10 @@
   * Github: https://github.com/GerardVanWyk
   * email: gerard.wyk@gmail.com
   * phone: 073 933 5110
+  * 
+  
+  * **Gian Paolo Buffo** u14446619
+  * Github: https://github.com/GianPaoloBuffo
+  * Linkedin: http://www.linkedin.com/in/gian-paolo-buffo-b72144102
+  * Email: gpbuffo@gmail.com
+  * 
