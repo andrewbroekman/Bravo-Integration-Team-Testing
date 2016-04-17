@@ -23,3 +23,7 @@
 * **Matthew Botha** u14214742
   * Github: https://github.com/MatthewBotha
   * Email: m.botha41@gmail.com
+
+* **Stuart Andrews** u12153983
+  * Github: https://github.com/stuartandrews93
+  * Email: stuart.andrews123@gmail.com
