@@ -19,3 +19,7 @@
 * **Hlengekile Jita** u14077893
   * Github: https://github.com/u14077893
   * Email: hlengekilejita@gmail.
+
+* **Matthew Botha** u14214742
+  * Github: https://github.com/MatthewBotha
+  * Email: m.botha41@gmail.com
