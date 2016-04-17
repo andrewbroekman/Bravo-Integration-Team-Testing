@@ -5,3 +5,9 @@
 * **Andrew Broekman** u11089777
   * Github: https://github.com/andrewbroekman
   * Linkedin: https://www.linkedin.com/in/andrewbroekman
+  * 
+  
+* **Gerard Jacques van wyk** u14101263
+  *Github: https://github.com/GerardVanWyk
+  *email: u14101263@tuks.co.za , gerard.wyk@gmail.com
+  *phone: 073 933 5110
