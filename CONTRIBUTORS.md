@@ -11,4 +11,3 @@
   * Github: https://github.com/GerardVanWyk
   * email: gerard.wyk@gmail.com
   * phone: 073 933 5110
-  * 
