@@ -31,3 +31,8 @@
 * **Marc Antel** u12026973
   * Github: https://github.com/AntelMarc
   * Email: antel.marc@gmail.com
+  
+  **Jedd Shneier** u13133064
+  * Github: https://github.com/u13133064
+  * Email: otakujedd@gmail.com
+
