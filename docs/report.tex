@@ -101,7 +101,7 @@ The source code reviewed can by found at the following Github repository \url{ht
 \subsection{Reporting}
 
 \subsection{Import/Export}
-The following import and export requirements was outlined in the functional requirements:
+The following import and export requirements were outlined in the functional requirements:
 \begin{itemize}
 	\item Importing and exporting of persons and research groups from a CSV file
 	\item Importing and exporting of publications for a person from a CSV file
@@ -148,9 +148,9 @@ The software architecture specification required the use of contract based softw
 
 In a contract based software development approach service contracts implement the functions which the service provider should expose with Plain Old Java Objects (POJOs) used to transport data between the database and business layer.  The integration team defined interfaces for the all POJO's and in the process did not define an interface or service contract for the service providers, against which implementations or so called realizations and mocks could be implemented against.
 
-Further more the integration team used @EJB annotations, the old Java EE annotations for dependecy injection, instead of @Injection annotations, which is the newer CDI public standard annotations.
+Further more the integration team used @EJB annotations, the old Java EE annotations for dependency injection, instead of @Injection annotations, which is the newer CDI public standard annotations.
 
-As the integration team is using the Glassfish application server, the application server allows for maintainability throught the use of dependency injection throught interfaces.  However for this to work, the beans should be implemented against an interface, which the integration team failed to do, as the bean consists of only a class which derives from the java.lang.Object object. Thw way in which the integration team implemented there system is a cause of concern for maintainability and hot deployment, the reason being that other submodules will need to depend directly on the bean object instead of the specified service contract interface.
+As the integration team is using the Glassfish application server, the application server allows for maintainability through the use of dependency injection through interfaces.  However for this to work, the beans should be implemented against an interface, which the integration team failed to do, as the bean consists of only a class which derives from the java.lang.Object object. The way in which the integration team implemented their system is a cause of concern for maintainability and hot deployment, the reason being that other submodules will need to depend directly on the bean object instead of the specified service contract interface.
 
 \subsubsection{Maintainability}
 The Java EE reference architecture has various open standards which has at least one open source implementation for an application server. This will allow for future maintainability and hence satisfies the required criteria.  Further more the lack of implementing beans against a service contract, will increase the difficulty and cost of maintaining the source base.
@@ -159,7 +159,7 @@ The Java EE reference architecture has various open standards which has at least
 The use of Glassfish as an application server will deliver the required functionality of thread-pooling, object-pooling, connection-pooling and clustering as specified by the architecture requirements.
 
 \subsubsection{Reliability}
-As required by the software architecture specification all service methods should utilize managed transactions, specifically using declarative transaction annotations. The integeration team however has no transaction control in the service classes, hence this quality requirement has not been met.
+As required by the software architecture specification all service methods should utilize managed transactions, specifically using declarative transaction annotations. The integration team however has no transaction control in the service classes, hence this quality requirement has not been met.
 
 \subsubsection{Security}
 Within the current code base there is no security implemented which implies that no declarative role based authorization or security frameworks is used within the system, in this regard the required security requirements have not been meant.
@@ -174,25 +174,25 @@ The integration testing also doesn't extend to testing the database including th
 
 \subsubsection{Deployability}
 As the system is developed in Java, the system will be able to run on Linux servers as required by the specification, since the Java Runtime Environment is available for the Linux Operating System.  However the specification required that the application should be deployable as a Docker container,
-which is not implemented by the integration team.  Hence the integration team has succeeded in partially fulfulling this requirement.
+which is not implemented by the integration team.  Hence the integration team has succeeded in partially fulfilling this requirement.
 
 \subsection{Application component concepts and constraints}
 \begin{itemize}
 	\item Service Contracts\\
-	The current implementation of the support research system currently makes no use service contracts for service providers. The service contracts are required by the mock implementation as well as the default implementation to allow one to switch between the different implementations using dependecy injection. In the current code base this will not be possible as dependecy injection is currently using the class type of the bean, and hence one will not be able to switch the mock implementation with the real implementation.
+	The current implementation of the support research system currently makes no use service contracts for service providers. The service contracts are required by the mock implementation as well as the default implementation to allow one to switch between the different implementations using dependency injection. In the current code base this will not be possible as dependency injection is currently using the class type of the bean, and hence one will not be able to switch the mock implementation with the real implementation.
 	
 	\item Stateless Session Beans\\
-	All beans implemented by the implementation team are currently setup as stateless session beans, as required by 
+	All beans implemented by the implementation team are currently set up as stateless session beans, as required by 
 	
 	\item Java Entities\\
-	Java Entities or so called Plain Old Java Objects are used to transport data between the database and business layer. The current Java entities used by the implementation team currently doesn't fulfill the requirements set out by the  JAVA persistence API.
+	Java Entities or so called Plain Old Java Objects are used to transport data between the database and business layer. The current Java entities used by the implementation team currently doesn't fulfil the requirements set out by the  JAVA persistence API.
 \end{itemize}
 
 \section{Persistence API}
 The current POJO's utilized by the implementation team currently doesn't comply with the requirements as per the Java Persistence API.  Specifically the following requirements are not met
 \begin{itemize}
 	\item The classes is not annotated with the javax.persistence.Entity annotation.
-	\item The classes doen't have a public or protected no-argument constructor.
+	\item The classes doesn't have a public or protected no-argument constructor.
 	\item The classes don't implement or extend a base entity which implement the java.io.Serializable interface.
 \end{itemize}
 
