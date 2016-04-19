@@ -71,7 +71,11 @@
 \pagenumbering{arabic}
 
 \section{Background}
+The client, Vreda Pieterse, from the University of Pretoria has requested a system to keep track of research publications in the Department of Computer Science at the University of Pretoria. The scope of the system is managing the administration involved in tracking of research publications within the department. However, collaboration on research papers is outside of the scope as a version control system is in use currently. The system is required to keep track of all publications and the associated metadata around the publications.
 
+This report evaluates the implementation of the support research system by the Bravo Integration team of phase 3. This report specifically evaluates whether the team has complied with the stated functional and architecture requirements as set out in the respective documents provided by the client.
+
+The source code reviewed can by found at the following Github repository \url{https://github.com/DillonHeins/Bravo}
 \section{Functional Testing Report}
 \subsection{Notifications}
 
@@ -95,6 +99,16 @@
 \subsubsection{calcAccreditationPointsForGroup}
 
 \subsection{Reporting}
+
+\subsection{Import/Export}
+The following import and export requirements was outlined in the functional requirements:
+\begin{itemize}
+	\item Importing and exporting of persons and research groups from a CSV file
+	\item Importing and exporting of publications for a person from a CSV file
+	\item Exporting published papers for a user or a group to a bibtex file
+\end{itemize}
+
+None of the above requirements have been met in the system due to the fact that no import or export implementation or mocking exists.
 
 \section{Architecture Compliance Analysis}
 \subsection{Quality requirements}
