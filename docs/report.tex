@@ -43,16 +43,16 @@
 	\begin{tabu} to \textwidth { X[l] X[l]}
 		\hline
 		\textbf{Surname, First Name (Initial)}	& \textbf{Student Number}	\\ \hline \hline
-		11089777		&		Broekman,Andrew (A)			\\ \hline
-		12153983		&		Andrews,Stuart (SD)			\\ \hline
-		13133064		&		Shneier,Jedd (J)				\\ \hline
-		14006512		&		Singh,Emilio (E)				\\ \hline
-		14009936		&		Cromhout,Reinhardt (RR)		\\ \hline
-		14040426		&		Loreggian,Fabio (FR)			\\ \hline
-		14077893		&		Jita,Hlengekile (H)				\\ \hline
-		14101263		&		van Wyk,Gerard (GJ)			\\ \hline
-		14214742		&		Botha,Matthew (MT)			\\ \hline
-		14446619		&		Buffo,Gian (GP)				\\ \hline
+		11089777		&		Broekman, Andrew (A)			\\ \hline
+		12153983		&		Andrews, Stuart (SD)			\\ \hline
+		13133064		&		Shneier, Jedd (J)				\\ \hline
+		14006512		&		Singh, Emilio (E)				\\ \hline
+		14009936		&		Cromhout, Reinhardt (RR)			\\ \hline
+		14040426		&		Loreggian, Fabio (FR)			\\ \hline
+		14077893		&		Jita, Hlengekile (H)				\\ \hline
+		14101263		&		van Wyk, Gerard (GJ)			\\ \hline
+		14214742		&		Botha, Matthew (MT)			\\ \hline
+		14446619		&		Buffo, Gian (GP)				\\ \hline
 		\hline
 	\end{tabu}}
 
@@ -74,7 +74,7 @@
 
 \section{Functional Testing Report}
 
-\section{Architecture Compliance Analysis }
+\section{Architecture Compliance Analysis}
 \subsection{Quality requirements}
 \subsubsection{Flexibility}
 
@@ -82,7 +82,7 @@
 
 \subsubsection{Scalability}
 
-\subsubsection{Performance requirements }
+\subsubsection{Performance requirements}
 
 \subsubsection{Reliability}
 
@@ -100,27 +100,71 @@
 
 \subsection{Architecture design \& tatics}
 \subsubsection{Flexibility}
+The software architecture specification required implementation of the following flexibility tactics:
+\begin{itemize}
+	\item hot-deployment
+	\item contract based software development with dependency injection
+\end{itemize}
+	
+The Glassfish application server allows for hot-deployment of an application into a live environment.
+
+The software architecture specification required the use of contract based software development with Java Contexts and Dependency Injection (CDI) dependency injection.  The integration team implemented the service contracts and domain models, however the implemented interfaces and domain models don't conform to the contract based software development approach.
+
+In a contract based software development approach service contracts implement the functions which the service provider should expose with Plain Old Java Objects (POJOs) used to transport data between the database and business layer.  The integration team defined interfaces for the all POJO's and in the process did not define an interface or service contract for the service providers, against which implementations or so called realizations and mocks could be implemented against.
+
+Further more the integration team used @EJB annotations, the old Java EE annotations for dependecy injection, instead of @Injection annotations, which is the newer CDI public standard annotations.
+
+As the integration team is using the Glassfish application server, the application server allows for maintainability throught the use of dependency injection throught interfaces.  However for this to work, the beans should be implemented against an interface, which the integration team failed to do, as the bean consists of only a class which derives from the java.lang.Object object. Thw way in which the integration team implemented there system is a cause of concern for maintainability and hot deployment, the reason being that other submodules will need to depend directly on the bean object instead of the specified service contract interface.
 
 \subsubsection{Maintainability}
+The Java EE reference architecture has various open standards which has at least one open source implementation for an application server. This will allow for future maintainability and hence satisfies the required criteria.  Further more the lack of implementing beans against a service contract, will increase the difficulty and cost of maintaining the source base.
 
 \subsubsection{Scalability}
-
-\subsubsection{Performance requirements }
+The use of Glassfish as an application server will deliver the required functionality of thread-pooling, object-pooling, connection-pooling and clustering as specified by the architecture requirements.
 
 \subsubsection{Reliability}
+As required by the software architecture specification all service methods should utilize managed transactions, specifically using declarative transaction annotations. The integeration team however has no transaction control in the service classes, hence this quality requirement has not been met.
 
 \subsubsection{Security}
+Within the current code base there is no security implemented which implies that no declarative role based authorization or security frameworks is used within the system, in this regard the required security requirements have not been meant.
 
 \subsubsection{Auditability}
+The architecture specification required that the auditability implementation must be maintainable, and should be implemented using aspects or interceptors. The current system however has no support for auditability.
 
 \subsubsection{Testability}
+The current unit and integration tests implemented don't fully test the submodules, including the required pre- and post-conditions.  This further extends into the integration tests, which doesn't ensure that all client request conform to all pre-conditions.
 
-\subsubsection{Usability}
-
-\subsubsection{Integrability}
+The integration testing also doesn't extend to testing the database including the persistence layer, either in the application server or outside the application server using an in-memory database such as H2 or Derby.
 
 \subsubsection{Deployability}
+As the system is developed in Java, the system will be able to run on Linux servers as required by the specification, since the Java Runtime Environment is available for the Linux Operating System.  However the specification required that the application should be deployable as a Docker container,
+which is not implemented by the integration team.  Hence the integration team has succeeded in partially fulfulling this requirement.
 
+\subsection{Application component concepts and constraints}
+\begin{itemize}
+	\item Service Contracts\\
+	The current implementation of the support research system currently makes no use service contracts for service providers. The service contracts are required by the mock implementation as well as the default implementation to allow one to switch between the different implementations using dependecy injection. In the current code base this will not be possible as dependecy injection is currently using the class type of the bean, and hence one will not be able to switch the mock implementation with the real implementation.
+	
+	\item Stateless Session Beans\\
+	All beans implemented by the implementation team are currently setup as stateless session beans, as required by 
+	
+	\item Java Entities\\
+	Java Entities or so called Plain Old Java Objects are used to transport data between the database and business layer. The current Java entities used by the implementation team currently doesn't fulfill the requirements set out by the  JAVA persistence API.
+\end{itemize}
 
+\section{Persistence API}
+The current POJO's utilized by the implementation team currently doesn't comply with the requirements as per the Java Persistence API.  Specifically the following requirements are not met
+\begin{itemize}
+	\item The classes is not annotated with the javax.persistence.Entity annotation.
+	\item The classes doen't have a public or protected no-argument constructor.
+	\item The classes don't implement or extend a base entity which implement the java.io.Serializable interface.
+\end{itemize}
+
+Further more, entities also doesn't specify a primary key using the javax.persistence.Id annotation.
+
+The current system also doesn't implement two phase commits across all services modules, which implies that the implementation only partially satisfies the required specification.
+
+\section{Reporting}
+The current code base of the support research system currently has no reporting functionality, hence the architecture specification of needing to use Jasper Reports for reporting has not been satisfied.
 
 \end{document}
