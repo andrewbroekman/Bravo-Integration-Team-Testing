@@ -134,6 +134,9 @@ None of the above requirements have been met in the system due to the fact that 
 
 \subsubsection{Deployability}
 
+\subsection{Architectural responsibilities}
+
+
 \subsection{Architecture design \& tatics}
 \subsubsection{Flexibility}
 The software architecture specification required implementation of the following flexibility tactics:
@@ -182,7 +185,7 @@ which is not implemented by the integration team.  Hence the integration team ha
 	The current implementation of the support research system currently makes no use service contracts for service providers. The service contracts are required by the mock implementation as well as the default implementation to allow one to switch between the different implementations using dependency injection. In the current code base this will not be possible as dependency injection is currently using the class type of the bean, and hence one will not be able to switch the mock implementation with the real implementation.
 	
 	\item Stateless Session Beans\\
-	All beans implemented by the implementation team are currently set up as stateless session beans, as required by 
+	All beans implemented by the implementation team are currently set up as stateless session beans, as required by the Architecture requirment spesification.
 	
 	\item Java Entities\\
 	Java Entities or so called Plain Old Java Objects are used to transport data between the database and business layer. The current Java entities used by the implementation team currently doesn't fulfil the requirements set out by the  JAVA persistence API.
