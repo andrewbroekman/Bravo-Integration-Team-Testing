@@ -143,6 +143,17 @@ The MobileDeviceAccess and BrowserAccess were both access the appliction through
 \subsection{Architecture constraints}
 The system was deployed on a Linux server and Glassfish does provide the required support for hot deployment as required.
 
+\subsection{Architecture design}
+\subsubsection{Architectural components addressing architectural responsibilities}
+\begin{itemize}
+	\item The ProcessExecutionEnvironment responsibility is partially fullfilled by the application server Glassfish. However the Glassfish server was not deployed as a docker image which was required.
+	\item The responsibility of persisting domain objects to a database was partially implemented using JPA. Some Mock Objects used the correct annotations
+	while other Mock Objects were not created at all or were not correctly annotatated Using for example the @Entity and @Id Annotations.
+	\item The responsibility of providing an environment for specifying and executing reports to a reporting frame-work was not implemented.
+	\item The responsibility of providing human access channels and external systems web access to the system services to a web services framework was
+	implemented via RESTfull services via Java REST wrapping objects.
+\end{itemize}
+
 \subsection{Architecture design \& tatics}
 \subsubsection{Flexibility}
 The software architecture specification required implementation of the following flexibility tactics:
