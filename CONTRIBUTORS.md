@@ -35,4 +35,9 @@
   **Jedd Shneier** u13133064
   * Github: https://github.com/u13133064
   * Email: otakujedd@gmail.com
+  
+  * **Reinhardt Cromhout** u14009936
+  * Github: https://github.com/ReinhardtCromhout
+  * email: u14009936@tuks.co.za
+  * 
 
