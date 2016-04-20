@@ -10,7 +10,7 @@ The `master` branch is production-ready and contains the latest tagged releases.
 Most modern git clients support git flow. If you are however using the git CLI on *nix, please install the git flow plugin on your distribution.
 
 ## Bravo Intergration Repository
-A public duplicate of the Bravo Intergration team's repository can be found [here](https://github.com/MatthewBotha/BravoIntergrationForTesting).
+The Bravo Intergration team's repository can be found [here](https://github.com/DillonHeins/Bravo).
 
 ## Credits
 All developers working on this repository are required to add there details to the `CONTRIBUTORS.md` file. A name, surname and student number are mandatory, but feel free to add any other information, like social links.
