@@ -138,7 +138,10 @@ None of the above requirements have been met in the system due to the fact that 
 The team did successfully implement the Web Access architectural responsibility by providing and exposing RESTfull web services using Java EE. \\
 The ProcessExecutionEnvironment responibility was addressed by the glassfish appilication server which is discussed under the heading "Architecture design \& tatics". \\
 Furthermore the Reporting, PersistenceAccess, and Persistence responisbilities were not addressed by the integration team as was required. \\
-The MobileDeviceAccess and BrowserAccess were both access the appliction through the Web Access responsibility
+The MobileDeviceAccess and BrowserAccess were both access the appliction through the Web Access responsibility.
+
+\subsection{Architecture constraints}
+The system was deployed on a Linux server and Glassfish does provide the required support for hot deployment as required.
 
 \subsection{Architecture design \& tatics}
 \subsubsection{Flexibility}
