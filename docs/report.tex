@@ -228,7 +228,8 @@ The current POJO's utilized by the implementation team currently doesn't comply 
 
 Further more, entities also doesn't specify a primary key using the javax.persistence.Id annotation.
 
-The current system also doesn't implement two phase commits across all services modules, which implies that the implementation only partially satisfies the required specification.
+The current system also doesn't implement two phase commits across all services modules, which implies that the implementation only partially satisfies the required specification since it does not 
+properly support \textit{transactions}.
 
 \section{Reporting}
 The current code base of the support research system currently has no reporting functionality, hence the architecture specification of needing to use Jasper Reports for reporting has not been satisfied.
