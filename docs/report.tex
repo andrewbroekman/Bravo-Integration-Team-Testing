@@ -154,6 +154,16 @@ The system was deployed on a Linux server and Glassfish does provide the require
 	implemented via RESTfull services via Java REST wrapping objects.
 \end{itemize}
 
+\subsubsection{Infrastructure}
+This section analises the layered architectural pattern that should have been implemented. 
+\begin{itemize}
+	\item The client layers were developed by submoduels and should not have been touched by die integration team.
+	\item The Acces layer was provided by REST wrapping the resources via Java EE which has been discussed already.
+	\item The bussiness proccess layer runs the glassfish applicaiton server which has been discussed already.
+	\item The persistence Access layer was partially implemented in terms of Java JPA and not at all in terms of Jasper Reports.
+	\item The persistence layer was not implemented correctly to provide a connection to a POSTGREsql database.
+\end{itemize}
+
 \subsection{Architecture design \& tatics}
 \subsubsection{Flexibility}
 The software architecture specification required implementation of the following flexibility tactics:
