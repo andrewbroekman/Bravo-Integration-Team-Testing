@@ -1,0 +1,166 @@
+Testing Phase Structure and Guidelines
+
+For Bravo
+
+1) Functional Testing Report
+ --------------------------------------
+Specify 
+    a) the functionality which is correctly implemented,
+
+	    Android Navigation:
+
+	    	It is apparent that there is functionality to navigate between views. The links on each page appear to be correct and, theoretically, the correct view and activity should load when the link is clicked. However, because the interface cannot be loaded into an emulator and does not run, this cannot be verified.
+
+	    Gradle:
+
+	    	The Gradle build file is correctly set up. When asked to build the project, it performed all the correct steps, including compilation, testing and initialization. Furthermore, the build file has the correct dependencies. However, because the project had compilation errors, code had to be added and/or commented out in order to get Gradle to run. When Gradle did run, it ran properly.
+
+    b) short-comings of the implemented functionality (with reference to pre- and post-conditions)
+
+	    Mock Objects
+
+	    While mock objects to exist and a mocking framework is apparent, there are no unit tests, therefor there are no pre- and post-conditions to satisfy to get a successful/failed test. 
+
+	    There are both Java class files, for implementations, and also XML files for Android layouts but the XML files have failed to render on an android emulator, using ADK API 21 or Android 6.0, which is the specific environment the team was targeting.
+
+	    We shall break down the shortcomings by listing specific important functions and highlighting the pre- and post-condition aspects in order to illustrate the shortcomings of those functions and therefor the shortcomings of the project as a whole.
+
+	    	1)	MainActivity.setUserDetails()
+	    		This function should construct a JSON object from the input received from the user. However, the function receives a string instead of a JSON object and uses the string to set Global variables, returning void instead of returning a JSON object.
+
+	    		Pre-conditions: 
+	    		The JSON object should be verified and only valid JSON objects should be processed.
+
+	    		Post-conditions:
+	    		If the JSON object is not valid or some other error occurs, the user should be notified somehow. 
+	    		A valid object should be used in a request to the server for persistence.
+
+	    		Failures:
+	    		Input is not validated.
+	    		Silently fails.
+	    		No request is generated or sent for persistence of the JSON object.
+
+	    	2)	RemoveFromGroup.endResearchAssociation()
+	    		This function is meant to remove a Person from a ResearchGroup. It should take these two objects and construct a request to remove the relationship (disassociate) between them. However, it does not end the research group association. Furthermore, an entire class was created for a single operation, demonstrating a lack of understanding on how OOP is implemented.
+
+	    		Pre-conditions:
+	    		Both the person and the group passed as parameters should be validated (checked if not null).
+	    		The relation between these objects should exist in the database.
+
+	    		Post-conditions:
+	    		Either if one/both of the parameters are invalid (null) or if the relationship between these objects does not exist, the user should be notified of the error.
+	    		If the request is valid, the relationship is removed from the database and the user should be notified of the removal.
+
+	    		Failures:
+	    		No validation is performed on the both the Person and group parameters. No server request is ever made to validate relationships between Person and Group. Even if this information is used, no server call sends out this information. When a failure occurs here an error message "Something went wrong" gets displayed, this error message is vague and uninformative, you would not even know what function in what object caused this error, a more informative error message such as "Person is empty" would be more sufficient.
+
+
+	    	3)	Admin.onOptionsItemSelected(MenuItem item)
+	    		This function is supposed to determine what level of privilege and then act on it. It should execute the functions that the admin chose to execute via a menu. This function receives a item object of type MenuItem. However, this function does not do any of this.
+
+	    		Pre-conditions:
+	    		The first precondition is that the input parameter exists and that it is in the scope of Admin.
+
+	    		Post-conditions:
+	    		Either the Admin's request is not valid or the Admin's request failed, then the function returns false. Otherwise the Admin's request is valid, is executed successfully, and the function returns true.
+
+	    		Failures:
+	    		The first problem is that the function does not check whether the parameter exists, the second problem is that the function does not check whether the parameter is in the scope of Admin.
+	    		Another large shortcoming is the fact that the function always returns true regardless of what happens.
+	    		The function only supports one action for the Admin, even though many more are specified in the specification.
+	    		However the most glaring issue is that this function makes use almost exclusively of objects and methods that are completely undefined.
+
+	    	4)	Report.onOptionsItemSelected(MenuItem item)
+	    		This function is supposed to receive an indication of what report it should generate, issue a request for that report object, receive the report as a JSON object, and then render it on the device.
+
+	    		Pre-conditions:
+	    		The first precondition is that the input parameter exists and that it is in the scope of the reporting module.
+
+	    		Post-conditions:
+	    		A valid request is received, a report request is issued, and the resulting report is rendered on the device, in this case true would be returned.
+	    		Should any failure occur false should be returned.
+
+	    		Failures:
+	    		The first problem is that the function does not check whether the parameter exists, the second problem is that the function does not check whether the parameter is in the scope of Report.
+	    		The function only supports one action to respond to the type of report, even though many more are specified in the specification.
+	    		The function makes no calls to any other objects or functions even though such action action is expected.
+	    	
+	    	5)	AddPublication.validateForm()
+	    		This function is meant to receive form data and validate it, it then returns true or false depending on whether the form was valid.
+
+	    		Pre-conditions:
+	    		The form exists and there is information entered into the form.
+
+	    		Post-conditions:
+	    		The information is valid and true is returned, or the information in the form is invalid and false is returned.
+
+	    		Failures:
+	    		The validation process is insufficient, whilst the function correctly checks whether the form is empty, nothing else is validated, specifically the due date, the name, and the URL, are not checked for being in the correct range or format.
+	    		Ideally the function should specify what failed if something goes wrong, however in this case the function could return false for a number of reasons.
+
+	    In summary, it is evident that parameter validation and informative error control are not in place. Furthermore, it is apparent that an understanding OOP is lacking, making functions and classes indistinct from one another.
+
+
+    c) any missing functionality 
+
+		Firstly, there was no existing tests to make use of to test. The single test file included is actually just empty. Next, the android application failed to launch from inside an emulator. We therefore concluded, after much rigorous searching, that none of the internal required functionality/client logic was correctly implemented.
+
+		The Java implementation fails in the following ways
+
+	    1) There are no calls/methods/mechanisms for the application to connect to a remote server. Hence it cannot make requests to the service server nor respond to any requests at all. This means that the entirety of the app exists purely on a local scale which is against the required functionality. 
+
+	    2) There is no evidence of RESTful wrapping handling. This means that the app does not issue HTTP requests for resources nor respond to HTTP requests. 
+
+	    3) The application fails to make use of any mechanism to render or even request reports
+
+2) Architecture compliance analysis 
+----------------------------------------------
+Specify 
+     a) which aspects of the software architecture specification were adhered to
+
+     In terms of specified architecture, the following two software architecture specifications were met by the Android team.
+
+     1) Gradle - The project has a Gradle build file that enables it to be built and constructed by the Gradle build system and this includes compilation of source files and testing of said files.
+
+     2) Android - The project was developed using Android specifically with the Android Studio Development Environment.
+
+     These are in line with the software architecture specifications.
+
+     b) which aspects of the software architecture specification were partially complied to, pointing out any short-comings with respect to the specification
+
+     In terms of this section, the choice of Android SDK API is an issue. Although chosen, and certainly a valid Android SDK API, API 23, or Android 6.0, is the very latest version of Android and is only supported on the most high-end devices. As a result, this means that there is an extremely limited scope for client phones as few phones will readily have this API. This is compounded by the fact that this was an unnecessary choice as all of the features implemented or required by the Android API would have been provided by API level 10(Android 2.3.3) or Android 3.0. Either API provides all of the necessary functionality but is far greater in scope as many devices are available to run this API as all devices are backwards compatible. 
+
+     c) which aspects of the software architecture specification were not implemented.
+
+     Jasper Reporting - Jasper Reporting is a framework to provide an efficient and effective method of wrapping data for the purposes of report presentation. You can specify the report structure using XML and then populate the XML skeleton using requests for data from the actual database. This allows you to serialize the report as a JSON object and send them to the client that can unpack and process the report in any format that they would like. However, the Android team did not use Jasper whatsoever, cannot unpack reports to render to the device, or generate reports. It is clear that there is no functionality to receive and process Jasper reports sent by the server. This does not comply with the architectural requirement to use Jasper reporting.
+
+     Requests and Responses - According to the architectural specification, the system is supposed to be RESTfull and stateless. Both the client and the server should only be able to communicate via HTTP requests, specifically GET and POST. However, the Android interface has no access to the server at all, let alone through HTTP requests. This does not comply with any of the requirements on a fundamental level, as the client is completely isolated from the server, defeating the purpose of a client-server model.
+
+Points
+1) bad choice of SDK API - they 6.0 which is only for few phones - should use for earlier models {3.3}
+
+2) They have no tests at all {No code is actually testable}
+
+3) Used resources not specified in the XML document {Strings}
+
+4) Very little was actually done - barren wasteland of android code
+
+5) Badly designed and very little actually done
+
+6) For integration 
+	1) Rest Wrapping Use HTTP
+	2) Connections to server -> no real connectivity
+	3) Jasper Reporting Methods -> not implemented
+
+
+Done
+1) Android Studio 
+2) Gradle
+Partially Done
+1) Android SDK API ->very bad choice of API
+	->really hard to work with
+
+Not Done
+1) Jasper
+2) RESTful Wrapping
+
