@@ -82,11 +82,21 @@ The source code reviewed can by found at the following Github repository \url{ht
 \subsection{People}
 
 \subsection{Publications}
-\subsubsection{addPublications}
+According to the functional requirements, the publications module should provide the functionality of maintaining information to track publications through their life cycle, from being envisaged to ultimately being either published or abandoned.
+\subsubsection{addPublication}
+The addPublication service should create a new publication with its own state trace represented by a time-ordered sequence of state entries. It should accept an AddPublicationRequest as an argument and return an AddPublicationResponse.
+
+This service was correctly defined in the Publications interface. However, the request and response objects were not implemented. As such, the post conditions for this service contract were not met: a publication with an initial state entry was not created, it was not persisted, and author users who requested notifications were not notified of the creation of the publication.
+
+A basic functioning mock object was created that checks against the pre-conditions associated with adding a new publication, such as whether a publication with the same title already exists for the same set of authors, and whether the request is valid or authorised. 
+
+A rudimentary unit test was created but did not test any actual functionality, as it merely defaulted to a failed test.
 
 \subsubsection{changePublicationState}
 
+
 \subsubsection{addPublicationType}
+
 
 \subsubsection{modifyPublicationType}
 
