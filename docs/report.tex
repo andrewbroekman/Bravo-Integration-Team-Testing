@@ -95,14 +95,20 @@ A rudimentary unit test was created but did not test any actual functionality, a
 \subsubsection{changePublicationState}
 A publication has a sequence of state entries representing the state trace for that publication. This is effectively an implementation of the \textit{memento} design pattern, with each state entry being a memento capturing a snapshot of the state of the publication. Therefore, changing the state of a publication should add a new state entry as described above. The changePublicationState service should accept a changePublicationStateRequest as an argument and return a changePublicationStateResponse.
 
-This service was correctly defined in the Publications interface, and a PublicationState Entity was created. However, only basic getters were implemented, in terms of retrieving the state of the latest publication. This does not allow one to view the state history of a publication. Additionally, no checks were made to see whether the person attempting to change the publication state was an author of the paper or the research leader of a research group which one or more of the authors are members of. Furthermore, no checks were made to prevent the title of the publication from being changed to a title that already exists for the authors, checking that the publication exists and ensuring that it has not yet been published. As such, none of the pre-conditions were met.
+This service was correctly defined in the Publications interface, and a PublicationState entity was created. However, only basic getters were implemented, in terms of retrieving the state of the latest publication. This does not allow one to view the state history of a publication. Additionally, no checks were made to see whether the person attempting to change the publication state was an author of the paper or the research leader of a research group which one or more of the authors are members of. Furthermore, no checks were made to prevent the title of the publication from being changed to a title that already exists for the authors, checking that the publication exists and ensuring that it has not yet been published. As such, none of the pre-conditions were met.
 
 In terms of post-conditions, basic setters were implemented to alter parts of a publication, such as the publication target. However, the new publication state was not added to a sequence of state entries. Additionally, no notification functionality was implemented.
 
 A rudimentary unit test was created but did not test any actual functionality, as it merely defaulted to a failed test.
 
 \subsubsection{addPublicationType}
+Administrators should be able to add new publication types, each with a unique name and an initial state. This state should typically be an active state to which zero or more accreditation points are assigned.
 
+This service was correctly defined in the Publications interface. Functionality for adding a PublicationType entity was included, but contained mostly rudimentary functionality, such as returning the state of the latest publication. Additionally, a PublicationTypeState entity was created, which included provision for the effective date after which accreditation points for a specific publication type become valid.
+
+The addPublicationType service should accept an addPublicationTypeRequest and return an addPublicationTypeResponse. The aforementioned request and response were not implemented. As such, the pre-conditions that users must have administrator rights and that a publication type with the same name does not exist yet were not met. Although a framework was set up to make use of the JPA, the publication type was not persisted. Thus the post-condition was not met either. 
+
+A rudimentary unit test was created but did not test any actual functionality, as it merely defaulted to a failed test.
 
 \subsubsection{modifyPublicationType}
 
