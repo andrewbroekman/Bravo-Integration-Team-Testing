@@ -28,7 +28,7 @@
 \frenchspacing
 
 \title{\includegraphics[width=12cm]{Eeufeeslogo.jpg} \\
-       Testing and Review Report \\ 
+       Testing and Review Report \\
        on Team Bravo Integration Repository Code \\
        \vspace{0.5cm}
        COS301 Software Engineering \\
@@ -37,7 +37,7 @@
        \vspace{1.0cm}
        }
 
-\date{} 
+\date{}
 \author{Team Echo\\
 	\vspace{0.5cm} \\
 	\begin{tabu} to \textwidth { X[l] X[l]}
@@ -88,7 +88,7 @@ The addPublication service should create a new publication with its own state tr
 
 This service was correctly defined in the Publications interface. However, the request and response objects were not implemented. As such, the post conditions for this service contract were not met: a publication with an initial state entry was not created, it was not persisted, and author users who requested notifications were not notified of the creation of the publication.
 
-A basic functioning mock object was created that checks against the pre-conditions associated with adding a new publication, such as whether a publication with the same title already exists for the same set of authors, and whether the request is valid or authorised. 
+A basic functioning mock object was created that checks against the pre-conditions associated with adding a new publication, such as whether a publication with the same title already exists for the same set of authors, and whether the request is valid or authorised.
 
 A rudimentary unit test was created but did not test any actual functionality, as it merely defaulted to a failed test.
 
@@ -106,7 +106,7 @@ Administrators should be able to add new publication types, each with a unique n
 
 This service was correctly defined in the Publications interface. Functionality for adding a PublicationType entity was included, but contained mostly rudimentary functionality, such as returning the state of the latest publication.
 
-The addPublicationType service should accept an addPublicationTypeRequest and return an addPublicationTypeResponse. The aforementioned request and response were not implemented. As such, the pre-conditions that users must have administrator rights and that a publication type with the same name does not exist yet were not met. Although a framework was set up to make use of the JPA, the publication type was not persisted. Thus the post-condition was not met either. 
+The addPublicationType service should accept an addPublicationTypeRequest and return an addPublicationTypeResponse. The aforementioned request and response were not implemented. As such, the pre-conditions that users must have administrator rights and that a publication type with the same name does not exist yet were not met. Although a framework was set up to make use of the JPA, the publication type was not persisted. Thus the post-condition was not met either.
 
 A rudimentary unit test was created but did not test any actual functionality, as it merely defaulted to a failed test.
 
@@ -186,7 +186,7 @@ The system was deployed on a Linux server and Glassfish does provide the require
 \end{itemize}
 
 \subsubsection{Infrastructure}
-This section analises the layered architectural pattern that should have been implemented. 
+This section analises the layered architectural pattern that should have been implemented.
 \begin{itemize}
 	\item The client layers were developed by submoduels and should not have been touched by die integration team.
 	\item The Acces layer was provided by REST wrapping the resources via Java EE which has been discussed already.
@@ -202,7 +202,7 @@ The software architecture specification required implementation of the following
 	\item hot-deployment
 	\item contract based software development with dependency injection
 \end{itemize}
-	
+
 The Glassfish application server allows for hot-deployment of an application into a live environment.
 
 The software architecture specification required the use of contract based software development with Java Contexts and Dependency Injection (CDI) dependency injection.  The integration team implemented the service contracts and domain models, however the implemented interfaces and domain models don't conform to the contract based software development approach.
@@ -241,10 +241,10 @@ which is not implemented by the integration team.  Hence the integration team ha
 \begin{itemize}
 	\item Service Contracts\\
 	The current implementation of the support research system currently makes no use service contracts for service providers. The service contracts are required by the mock implementation as well as the default implementation to allow one to switch between the different implementations using dependency injection. In the current code base this will not be possible as dependency injection is currently using the class type of the bean, and hence one will not be able to switch the mock implementation with the real implementation.
-	
+
 	\item Stateless Session Beans\\
 	All beans implemented by the implementation team are currently set up as stateless session beans, as required by the Architecture requirment spesification.
-	
+
 	\item Java Entities\\
 	Java Entities or so called Plain Old Java Objects are used to transport data between the database and business layer. The current Java entities used by the implementation team currently doesn't fulfil the requirements set out by the  JAVA persistence API.
 \end{itemize}
@@ -259,8 +259,43 @@ The current POJO's utilized by the implementation team currently doesn't comply 
 
 Further more, entities also doesn't specify a primary key using the javax.persistence.Id annotation.
 
-The current system also doesn't implement two phase commits across all services modules, which implies that the implementation only partially satisfies the required specification since it does not 
+The current system also doesn't implement two phase commits across all services modules, which implies that the implementation only partially satisfies the required specification since it does not
 properly support \textit{transactions}.
+
+\section{Web Services Framework}
+  \subsection{Architecture Requirements}
+    The team adheared to the public standard and open-source implementation of their RESTful services. Thus it will be easily maintained and itegrated.
+  \subsection{Architecture Design}
+    The team implemented their RESTful services almost perfectly to the desing that is stipulated with Jersey, ie grouping the Peoples services into a PeoplesResource class, then defining POST, GET and PUT actions. They include all their JSON @Consumes where necessary, and JSON @Produces, but where they fell short is defining the paths within the resource and specifically with GET. The implementation required was @Path("{id}"), the retrieving the object from the ID, they however are expecting the object to to passed through the request header.
+
+
+\section{Web Application Framework}
+  \subsection{Architecture Requirements}
+    \subsubsection{Access and Integration Requirements}
+      The application is viewable on most well known browers.\\
+      The team implemented integration with the REST API, but there was no backend services to connect to, so they connected to mock REST objects.
+    \subsubsection{Quality Requirements}
+      The site is not fully usable.\\
+      Because they used to technology assigned to them Ember.js, and they created the application the correct way, it is very maintainable.\\
+      The bower and ember components with the template system used, the web interface is very flexible. As it is new technology.\\
+      Performance within a site that doesnt work as intended, is hard to gauge but, the technology stack provides great looking and very responsive website.
+    \subsubsection{Architectural Resposibilities}
+      Because the team used Emberjs with querying REST API and a template system. Most responsibilites have been met. As they provide servvices such as Navigation, Maintaing View State, User views, Integration with REST layer(only through mock objects) and Template Processing.
+    \subsubsection{Architectural Constraints}
+      The web interface is using open source technology such as Emberjs and Bower. And conforming to Public standards.
+  \subsection{Architecture Design}
+    \subsubsection{Tactics}
+      \begin{itemize}
+        \item Caching
+        \item Templating
+        \item Pre Compilation
+        \item Automatic Model Population
+        \item Virtual DOM
+      \end{itemize}
+    \subsubsection{Frameworks and Technologies}
+      The team succesfully utilized Ember.js and all of its components. They unfortunately did not complete all the pages, and did not successfully implement all tactics such as virtual dom, amp and caching, but they utilixed the most important aspect which is templates. Most components within Ember.js that address the responsibilites has not been met as they do not have a fully working system.
+    \subsubsection{Concepts and Constraints for application components}
+      The team has successfully implemented the MVC framework which Ember requires to use, such as the Models created, the Templates used and the Controller which does not connect directly to ORM but rather through REST points.
 
 \section{Reporting}
 The current code base of the support research system currently has no reporting functionality, hence the architecture specification of needing to use Jasper Reports for reporting has not been satisfied.

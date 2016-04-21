@@ -5,7 +5,6 @@
 * **Andrew Broekman** u11089777
   * Github: https://github.com/andrewbroekman
   * Linkedin: https://www.linkedin.com/in/andrewbroekman
-  * 
   
 * **Gerard Jacques van wyk** u14101263
   * Github: https://github.com/GerardVanWyk
@@ -32,12 +31,16 @@
   * Github: https://github.com/AntelMarc
   * Email: antel.marc@gmail.com
   
-  **Jedd Shneier** u13133064
+* **Jedd Shneier** u13133064
   * Github: https://github.com/u13133064
   * Email: otakujedd@gmail.com
   
-  * **Reinhardt Cromhout** u14009936
+* **Reinhardt Cromhout** u14009936
   * Github: https://github.com/ReinhardtCromhout
   * email: u14009936@tuks.co.za
-  * 
+
+* **Fabio Loreggian** u14040426
+  * Github: https://github.com/u14040426
+  * email: u14040426@tuks.co.za
+  
 
