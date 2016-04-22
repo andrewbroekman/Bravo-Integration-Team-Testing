@@ -112,6 +112,33 @@ The integrated system also does not deal well with the various possibilities for
 The integration of this module thus has dire shortcomings and lacks all the key required functionality.
 
 \subsection{People}
+According to the Application Specifications, the persons module is responsible for maintaining demographic information about the persons (researchers) themselves, some of which may be users of the system and others not as well as groupings of persons into research groups.
+
+The scope of the persons module includes
+
+\begin{itemize}
+	\item adding persons and modifying their details including the researcher category a person is	assigned to.
+	\item adding groupings of persons into research groups as well as grouping groups into higher-level groups.
+	\item defining and changing group memberships of persons.
+	\item creating and modifying researcher categories with associated research output targets.
+\end{itemize}
+
+	On the first point, adding and modifying, Bravo Integration provided sufficient mock objects to create a Person object. In the person class, various mutator methods were provided to edit the various Person details, such as the name, surname, id, email and privileges. 
+	
+	A sufficient Person constructor method also creates the correct Person mock object.
+	
+	Each person has ResearchGroupAssociation's linked list associated with their object, containing the groups that they're part of, as well as another list specifying research category.
+	
+	On the second point, each user is successfully grouped as per their privilege levels. 
+	
+	On the third point, the functionality required, that being able to define and change groups, only the former was correctly implemented. The group is defined using the Group.java class, where the name etc. of said group is set. As well as setting the name of the group, it allows PersonEntities to be add to the group, this last part keeping with defining user group associations.
+	
+	The changing group association, is also implemented correctly. Through the PersonEntity.java class, there is an option to setGroup, which changes the users current group.
+	
+	On the fourth and final point, creating and modifying researcher categories, the requirement was to be able to create and modify research categories, but they also needed associated research output targets. The ResearchCategory.java allows the user to define categories. Including a data, which is associated to the research output targets.
+	
+	On the whole of it, the People section mock object was implemented correctly and should behave correctly. 
+	
 
 \subsection{Publications}
 According to the functional requirements, the publications module should provide the functionality of maintaining information to track publications through their life cycle, from being envisaged to ultimately being either published or abandoned.
