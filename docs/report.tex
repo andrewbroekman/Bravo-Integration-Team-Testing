@@ -79,6 +79,39 @@ The source code reviewed can by found at the following Github repository \url{ht
 \section{Functional Testing Report}
 \subsection{Notifications}
 
+The Application Requirements and Design Specification provided by the client for the Research Support System states that the Notifications module is to provide the ability to send once-off or reminder(i.e. in intervals) messages to users. The following types of notifications need to be sent using this module:
+\begin{itemize}
+	\item Reminder
+    \item Activity
+    \item Report
+  	\item Broadcast
+\end{itemize}
+
+As per the scope in the specification, this means the following business methods need to be implemented in order to provide these services:
+\begin{itemize}
+	\item sendReminder
+    \item sendActivityNotification
+    \item sendReport
+\end{itemize}
+
+The Notifications module itself in the current implementation of this system does provide this functionality but none of the implementations are correctly done. This module successfully considers the sending of broadcast messages by taking in email lists in the function parameters, but in none of the methods is the email sent to multiple users. In fact this module fails to send the messages at all in any of the module services, this being the modules key purpose. For notifications that are to be sent in intervals such as the reminder notification, there is no use of scheduling or even the receiving of the precondition of interval concepts such as duration or dates in the method signatures.
+
+However this should not have affected the integration of the notifications modules expected functionality because where the current implementation of the Notifications module failed in implementing the required functionality, they would simply mock what was required to allow the system to be functional despite the modules failures.
+
+For the Research Support System as a whole to provide this functionality, integration of this module would require functionality to interact with various modules of the system. In the case of the Notifications module this implies providing the services of the Notifications module to the external aspects through providing a standard way for the client aspects to communicate with this server-side module.
+
+To do this, integration would need to call the Notifications services, pass the required information in the right format, depending on the type of notification required and the business service to be used, and process a response of a certain format and forward it in the required format.
+
+This functionality includes the ability to process information from these external aspects which would come in as JSON objects, and forward it to the Notifications module so the necessary service can be run using that information. In addition to that the information sent back by the module would need to be processed back into a format for client aspects of the system. Thus the use of Request and Response objects were to be used. 
+
+Unfortunately Integration of this module failed because none of the above outlined functionality is provided(mocked or not). The only function the current Research Support System provides in terms of Notifications, is the ability to get a notification from the Notifications module and return it as a RESTful web service.
+
+There is no processing of information never mind any acknowledgment of information from the client aspects of the system. Thus the information is never sent to the Notifications module itself. In the mocked version of the module, there is no evidence of any of the expected functionality, that is sendReport, sendReminder or sendActivityNotification, or the fact that there are various types of notifications that require different information in the forms of requests.
+
+The integrated system also does not deal well with the various possibilities for responses. Whether the notification was able to send successfully or not. It only gets a String from the notifications module which it immediately sends to a RESTful web resource.
+
+The integration of this module thus has dire shortcomings and lacks all the key required functionality.
+
 \subsection{People}
 
 \subsection{Publications}
