@@ -1,4 +1,4 @@
-\documentclass[a4paper,10pt]{article}
+X\documentclass[a4paper,10pt]{article}
 \usepackage[margin=2cm]{geometry}
 \usepackage{graphicx}
 \usepackage{hyperref}
@@ -182,13 +182,42 @@ Due to the lack of implementation, the pre-conditions regarding whether a user i
 A rudimentary unit test was created but did not test any actual functionality, as it merely defaulted to a failed test.
 
 \subsubsection{getPublicationsForPerson}
+This service should  return all publications for an author which either have been published, accepted or are
+envisaged to be published for a user within a specifed time period. If no time period is specifed,
+then all matching publications over all time should be returned.
+
+This service was correctly defined in the Publications interface. Functionality for retrieving the list of publications is correctly implemented, however no autherization is done. The is no pre conditiosn for this contract and post condition of matched results being returned is met.
+
+There is a unit test which succesfuly shows the correct workings of the service ,however dependencies are hard coded in. According to specifications these should have been handled by dependency injection.
 
 \subsubsection{getPublicationsForGroup}
+This service is similar to the getPublicationsForPerson service except that it  should return all published,
+accepted or envisaged publications for a period for a group. The group may be a frst level group
+(e.g. a specifc research group) or a higher level group (e.g. the department).
+
+This service was correctly defined in the Publications interface. Functionaly however it is inccorectly implemented as the group level is not taken into account in the request object. Besisdes this the functio ngets a list for a specified group name.
+
+The unit test went much like the getPublicationsForPerson unit test. Though it is inccorect as it cannot distinguish from group level. Also fails to implement dependency injection.
+
 
 \subsubsection{calcAccreditationPointsForPerson}
+This service should find all publications published, accepted or envisaged to be published for a period by
+a person and sums up the accreditation points earned.
+
+This service was correctly defined in the Publications interface. Itsfunctionality is correctly implemented in the Bean and all requests a nd responses were implemented. the post and preconditions of the service contract are implemented.
+
+The unit test succeded but fails to once again make use of dependency injection isntead hard coding mock objects.
+
 
 \subsubsection{calcAccreditationPointsForGroup}
+This service is similar to the calcAccreditationPointsForPerson service except that it is supposed to  accumulate
+the accreditation points for all persons who are part of that group. The group may be a frst level
+group (e.g. a specifc research group) or a higher level group (e.g. the department). All members
+of a sub-group are also members of any higher level grouping.
 
+This service was correctly defined in the Publications interface. Its core functionallity is correctly implemented, but the request object is incorrert as it does not allow higher level group searches and does not take into account group-member heirarchy grouping.
+
+The unit test succeded but fails to once again make use of dependency injection isntead hard coding mock objects.
 \subsection{Reporting}
 
 \subsection{Import/Export}
