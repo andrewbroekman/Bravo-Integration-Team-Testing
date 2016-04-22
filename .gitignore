@@ -257,6 +257,7 @@ Session.vim
 *.out
 *.toc
 *.fmt
+*.pdf
 
 ## Intermediate documents:
 *.dvi
