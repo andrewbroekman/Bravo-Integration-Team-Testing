@@ -190,7 +190,11 @@ A rudimentary unit test was created but did not test any actual functionality, a
 \subsubsection{calcAccreditationPointsForGroup}
 
 \subsection{Reporting}
+The Reporting module should generate visualisations of information. Two different types of reports were expected to be generated. One that returns statistical information of accreditation Units that comply with certain restrictions, such as a date period and/or author. Another that returns the progress status of publications indicated in percentage.
 
+Due to a lack of implementation and a mock on the reporting team, integration bravo was tasked with making their mock for reporting. The mock that was created did not create a report, but instead just returned a string stating which report was meant to have been created. Integration alpha's system doesn't the reporting methods that were required in the specifications. They created reports depending on the types of graphs instead of an accreditation unit report and progress report. 
+
+Functionality testing was very limited due to no input requirements from a user and basic output from the system.
 \subsection{Import/Export}
 The following import and export requirements were outlined in the functional requirements:
 \begin{itemize}
