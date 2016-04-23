@@ -389,12 +389,23 @@ properly support \textit{transactions}.
     The team adheared to the public standard and open-source implementation of their RESTful services. Thus it will be easily maintained and itegrated.
   \subsection{Architecture Design}
     The team implemented their RESTful services almost perfectly to the desing that is stipulated with Jersey, ie grouping the Peoples services into a PeoplesResource class, then defining POST, GET and PUT actions. They include all their JSON @Consumes where necessary, and JSON @Produces, but where they fell short is defining the paths within the resource and specifically with GET. The implementation required was @Path("{id}"), the retrieving the object from the ID, they however are expecting the object to to passed through the request header.
-
+ \subsubsection{Quality Requirements}
+    On the subject of quality:
+    \begin{enumerate}
+	\item The application could not start.
+	\item The application was developed using the Gradle build system with Android Studio specifically being the development environment. This does mean that the system could in theory, support maintainability as future teams would have easy access to all of the resources needed to maintain the system.
+	\item What little functions are implemented correctly do not receive a wrapped object, or even parameters, as the unit test is hardcoded in.
+	\item The android API selected was 6.0 or API level 23. While this is the very latest version possible, it is also the least flexible because only a handful of mobile devices currently support it.
+	\item While xml files describing the layout of multiple pages is present, they are never rendered and are imageless and nearly colourless.
+	\item The application could not function so the performance of it cannot be measured.
+    \end{enumerate}
+    \subsubsection{Architectural Responsibilities}
+    The primary architectural responsibility, to read and display information from a database, is not met. The mobile application has only bits and pieces of functionality and even then only on a local scale within objects/methods, never is information read from or sent to a database.
 
 \section{Android Application Framework}
   \subsection{Architecture Requirements}
     \subsubsection{Access and Integration Requirements}
-  	The mobile application was not viewable from multiple contexts. It did not render on any Android device  emulator nor was viewable from any phone. There was implementation of REST API but no backend services meant that this what functionality existed was as a result of the provision of mocked REST objects. 
+  	The mobile application was not viewable from multiple, or any, contexts. It did not render on any Android device  emulator nor was viewable from any phone. There was implementation of REST API but no backend services meant that this what functionality existed was as a result of the provision of mocked REST objects. 
     \subsubsection{Quality Requirements}
     There were a number of quality requirements issues present:
     \begin{enumerate}
