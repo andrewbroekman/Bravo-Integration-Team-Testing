@@ -53,6 +53,7 @@
 		14101263		&		van Wyk, Gerard (GJ)			\\ \hline
 		14214742		&		Botha, Matthew (MT)			\\ \hline
 		14446619		&		Buffo, Gian Paolo (GP)				\\ \hline
+		12026973		&		Antel, Marc (M) 			\\ \hline
 		\hline
 	\end{tabu}}
 
@@ -112,6 +113,33 @@ The integrated system also does not deal well with the various possibilities for
 The integration of this module thus has dire shortcomings and lacks all the key required functionality.
 
 \subsection{People}
+According to the Application Specifications, the persons module is responsible for maintaining demographic information about the persons (researchers) themselves, some of which may be users of the system and others not as well as groupings of persons into research groups.
+
+The scope of the persons module includes
+
+\begin{itemize}
+	\item adding persons and modifying their details including the researcher category a person is	assigned to.
+	\item adding groupings of persons into research groups as well as grouping groups into higher-level groups.
+	\item defining and changing group memberships of persons.
+	\item creating and modifying researcher categories with associated research output targets.
+\end{itemize}
+
+	On the first point, adding and modifying, Bravo Integration provided sufficient mock objects to create a Person object. In the person class, various mutator methods were provided to edit the various Person details, such as the name, surname, id, email and privileges. 
+	
+	A sufficient Person constructor method also creates the correct Person mock object.
+	
+	Each person has ResearchGroupAssociation's linked list associated with their object, containing the groups that they're part of, as well as another list specifying research category.
+	
+	On the second point, each user is successfully grouped as per their privilege levels. 
+	
+	On the third point, the functionality required, that being able to define and change groups, only the former was correctly implemented. The group is defined using the Group.java class, where the name etc. of said group is set. As well as setting the name of the group, it allows PersonEntities to be add to the group, this last part keeping with defining user group associations.
+	
+	The changing group association, is also implemented correctly. Through the PersonEntity.java class, there is an option to setGroup, which changes the users current group.
+	
+	On the fourth and final point, creating and modifying researcher categories, the requirement was to be able to create and modify research categories, but they also needed associated research output targets. The ResearchCategory.java allows the user to define categories. Including a data, which is associated to the research output targets.
+	
+	On the whole of it, the People section mock object was implemented correctly and should behave correctly. 
+	
 
 \subsection{Publications}
 According to the functional requirements, the publications module should provide the functionality of maintaining information to track publications through their life cycle, from being envisaged to ultimately being either published or abandoned.
@@ -154,15 +182,48 @@ Due to the lack of implementation, the pre-conditions regarding whether a user i
 A rudimentary unit test was created but did not test any actual functionality, as it merely defaulted to a failed test.
 
 \subsubsection{getPublicationsForPerson}
+This service should  return all publications for an author which either have been published, accepted or are
+envisaged to be published for a user within a specifed time period. If no time period is specifed,
+then all matching publications over all time should be returned.
+
+This service was correctly defined in the Publications interface. Functionality for retrieving the list of publications is correctly implemented, however no autherization is done. The is no pre conditiosn for this contract and post condition of matched results being returned is met.
+
+There is a unit test which succesfuly shows the correct workings of the service ,however dependencies are hard coded in. According to specifications these should have been handled by dependency injection.
 
 \subsubsection{getPublicationsForGroup}
+This service is similar to the getPublicationsForPerson service except that it  should return all published,
+accepted or envisaged publications for a period for a group. The group may be a frst level group
+(e.g. a specifc research group) or a higher level group (e.g. the department).
+
+This service was correctly defined in the Publications interface. Functionaly however it is inccorectly implemented as the group level is not taken into account in the request object. Besisdes this the functio ngets a list for a specified group name.
+
+The unit test went much like the getPublicationsForPerson unit test. Though it is inccorect as it cannot distinguish from group level. Also fails to implement dependency injection.
+
 
 \subsubsection{calcAccreditationPointsForPerson}
+This service should find all publications published, accepted or envisaged to be published for a period by
+a person and sums up the accreditation points earned.
+
+This service was correctly defined in the Publications interface. Itsfunctionality is correctly implemented in the Bean and all requests a nd responses were implemented. the post and preconditions of the service contract are implemented.
+
+The unit test succeded but fails to once again make use of dependency injection isntead hard coding mock objects.
+
 
 \subsubsection{calcAccreditationPointsForGroup}
+This service is similar to the calcAccreditationPointsForPerson service except that it is supposed to  accumulate
+the accreditation points for all persons who are part of that group. The group may be a frst level
+group (e.g. a specifc research group) or a higher level group (e.g. the department). All members
+of a sub-group are also members of any higher level grouping.
 
+This service was correctly defined in the Publications interface. Its core functionallity is correctly implemented, but the request object is incorrert as it does not allow higher level group searches and does not take into account group-member heirarchy grouping.
+
+The unit test succeded but fails to once again make use of dependency injection isntead hard coding mock objects.
 \subsection{Reporting}
+The Reporting module should generate visualisations of information. Two different types of reports were expected to be generated. One that returns statistical information of accreditation Units that comply with certain restrictions, such as a date period and/or author. Another that returns the progress status of publications indicated in percentage.
 
+Due to a lack of implementation and a mock on the reporting team, integration bravo was tasked with making their mock for reporting. The mock that was created did not create a report, but instead just returned a string stating which report was meant to have been created. Integration alpha's system doesn't the reporting methods that were required in the specifications. They created reports depending on the types of graphs instead of an accreditation unit report and progress report. 
+
+Functionality testing was very limited due to no input requirements from a user and basic output from the system.
 \subsection{Import/Export}
 The following import and export requirements were outlined in the functional requirements:
 \begin{itemize}
@@ -328,6 +389,43 @@ properly support \textit{transactions}.
       The team succesfully utilized Ember.js and all of its components. They unfortunately did not complete all the pages, and did not successfully implement all tactics such as virtual dom, amp and caching, but they utilixed the most important aspect which is templates. Most components within Ember.js that address the responsibilites has not been met as they do not have a fully working system.
     \subsubsection{Concepts and Constraints for application components}
       The team has successfully implemented the MVC framework which Ember requires to use, such as the Models created, the Templates used and the Controller which does not connect directly to ORM but rather through REST points.
+
+\section{Mobile Application Framework}
+  \subsection{Architecture Requirements}
+    The team adheared to the public standard and open-source implementation of their RESTful services. Thus it will be easily maintained and itegrated.
+  \subsection{Architecture Design}
+    The team implemented their RESTful services almost perfectly to the desing that is stipulated with Jersey, ie grouping the Peoples services into a PeoplesResource class, then defining POST, GET and PUT actions. They include all their JSON @Consumes where necessary, and JSON @Produces, but where they fell short is defining the paths within the resource and specifically with GET. The implementation required was @Path("{id}"), the retrieving the object from the ID, they however are expecting the object to to passed through the request header.
+
+
+\section{Web Application Framework}
+  \subsection{Architecture Requirements}
+    \subsubsection{Access and Integration Requirements}
+  	The mobile application was not viewable from multiple contexts. It did not render on any Android device  emulator nor was viewable from any phone. There was implementation of REST API but no backend services meant that this what functionality existed was as a result of the provision of mocked REST objects. 
+    \subsubsection{Quality Requirements}
+    There were a number of quality requirements issues present:
+    \begin{enumerate}
+	\item The application was not useable at all.
+	\item The application was developed using the Gradle build system with    Android Studio specifically being the development environment. This does mean that the system could in theory, support maintainability as future teams would have easy access to all of the resources needed to maintain the system.
+	\item The android API selected was 6.0 or API level 23. While this is the very latest version possible, it is also the least flexible because the fewest number of mobile devices currently support it.
+	
+	\item The performance of a non-functioning application cannot be accurately gauged.
+    \end{enumerate}
+    \subsubsection{Architectural Responsibilities}
+    The primary architectural responsibility, to implement a REST API querying system, to ensure a stateless client, was not met. As such, no services could have been accessible to the mobile client nor processed. What was evident,however,was local capacity to realise those services but again, that falls short of the initial requirement.
+    \subsubsection{Architectural Constraints}
+  \subsection{Architecture Design}
+    \subsubsection{Tactics}
+      \begin{itemize}
+        \item Caching
+        \item Templating
+        \item Pre Compilation
+        \item Automatic Model Population
+        \item Virtual DOM
+      \end{itemize}
+    \subsubsection{Frameworks and Technologies}
+    \subsubsection{Concepts and Constraints for application components}
+
+
 
 \section{Reporting}
 The current code base of the support research system currently has no reporting functionality, hence the architecture specification of needing to use Jasper Reports for reporting has not been satisfied.

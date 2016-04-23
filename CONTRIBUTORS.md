@@ -37,10 +37,13 @@
   
 * **Reinhardt Cromhout** u14009936
   * Github: https://github.com/ReinhardtCromhout
-  * email: u14009936@tuks.co.
+  * email: u14009936@tuks.co.za
 
 * **Fabio Loreggian** u14040426
   * Github: https://github.com/u14040426
   * email: u14040426@tuks.co.za
 
+* **Wmilio Singh** u14006512
+  * Github: https://github.com/u14006512
+  * email: u14006512@tuks.co.za
 
