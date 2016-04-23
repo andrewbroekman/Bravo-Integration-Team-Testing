@@ -424,10 +424,28 @@ properly support \textit{transactions}.
       \end{itemize}
     \subsubsection{Frameworks and Technologies}
     \begin{enumerate}
-    	\item \textbf{Jasper Reporting: }Jasper Reporting is a framework to provide an efficient and effective method of wrapping data for the purposes of report presentation. You can specify the report structure using XML and then populate the XML skeleton using requests for data from the actual database. This allows you to serialize the report as a JSON object and send them to the client that can unpack and process the report in any format that they would like. However, the Android team did not use Jasper whatsoever, cannot unpack reports to render to the device, or generate reports. It is clear that there is no functionality to receive and process Jasper reports sent by the server. This does not comply with the architectural requirement to use Jasper reporting.
+    	\item \textbf{Jasper Reporting: }Jasper Reporting is a framework to provide an efficient and effective method of wrapping data for the purposes of report presentation.
+    	You can specify the report structure using XML and then populate the XML skeleton using requests for data from the actual database.
+    	This allows you to serialize the report as a JSON object and send them to the client that can unpack and process the report in any format that they would like.
+    	However, the Android team did not use Jasper whatsoever, cannot unpack reports to render to the device, or generate reports.
+    	It is clear that there is no functionality to receive and process Jasper reports sent by the server.
+    	This does not comply with the architectural requirement to use Jasper reporting.
     	\item \textbf{Gradle: } The project has a Gradle build file that enables it to be built and constructed by the Gradle build system and this includes compilation of source files and testing of said files.
+    	The Gradle build file is correctly set up.
+    	When asked to build the project, it performed all the correct steps, including compilation, testing and initialization.
+    	Furthermore, the build file has the correct dependencies.
+    	However, because the project had compilation errors, code had to be added and/or commented out in order to get Gradle to run.
+    	When Gradle did run, it ran properly.
     	\item \textbf{Android Studio: } The project was developed using Android specifically with the Android Studio Development Environment.
-    	\item \textbf{Android SDK API: } The choice of Android SDK API is an issue. Although chosen, and certainly a valid Android SDK API, API 23, or Android 6.0, is the very latest version of Android and is only supported on the most high-end devices. As a result, this means that there is an extremely limited scope for client phones as few phones will readily have this API. This is compounded by the fact that this was an unnecessary choice as all of the features implemented or required by the Android API would have been provided by API level 10(Android 2.3.3) or Android 3.0. Either API provides all of the necessary functionality but is far greater in scope as many devices are available to run this API as all devices are backwards compatible. 
+    	\item \textbf{Android SDK API: } The choice of Android SDK API is an issue.
+    	Although chosen, and certainly a valid Android SDK API, API 23, or Android 6.0, is the very latest version of Android and is only supported on the most high-end devices.
+    	As a result, this means that there is an extremely limited scope for client phones as few phones will readily have this API.
+    	This is compounded by the fact that this was an unnecessary choice as all of the features implemented or required by the Android API would have been provided by API level 10(Android 2.3.3) or Android 3.0.
+    	Either API provides all of the necessary functionality but is far greater in scope as many devices are available to run this API as all devices are backwards compatible.
+    	\item \textbf{Requests and Responses: } According to the architectural specification, the system is supposed to be RESTfull and stateless.
+    	Both the client and the server should only be able to communicate via HTTP requests, specifically GET and POST.
+    	However, the Android interface has no access to the server at all, let alone through HTTP requests.
+    	This does not comply with any of the requirements on a fundamental level, as the client is completely isolated from the server, defeating the purpose of a client-server model.
     \end{enumerate}
     \subsubsection{Concepts and Constraints for application components}
 
