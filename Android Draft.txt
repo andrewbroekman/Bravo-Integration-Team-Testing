@@ -136,31 +136,3 @@ Specify
 
      Requests and Responses - According to the architectural specification, the system is supposed to be RESTfull and stateless. Both the client and the server should only be able to communicate via HTTP requests, specifically GET and POST. However, the Android interface has no access to the server at all, let alone through HTTP requests. This does not comply with any of the requirements on a fundamental level, as the client is completely isolated from the server, defeating the purpose of a client-server model.
 
-Points
-1) bad choice of SDK API - they 6.0 which is only for few phones - should use for earlier models {3.3}
-
-2) They have no tests at all {No code is actually testable}
-
-3) Used resources not specified in the XML document {Strings}
-
-4) Very little was actually done - barren wasteland of android code
-
-5) Badly designed and very little actually done
-
-6) For integration 
-	1) Rest Wrapping Use HTTP
-	2) Connections to server -> no real connectivity
-	3) Jasper Reporting Methods -> not implemented
-
-
-Done
-1) Android Studio 
-2) Gradle
-Partially Done
-1) Android SDK API ->very bad choice of API
-	->really hard to work with
-
-Not Done
-1) Jasper
-2) RESTful Wrapping
-
