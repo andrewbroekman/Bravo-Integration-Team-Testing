@@ -302,9 +302,14 @@ The software architecture specification required the use of contract based softw
 
 In a contract based software development approach service contracts implement the functions which the service provider should expose with Plain Old Java Objects (POJOs) used to transport data between the database and business layer.  The integration team defined interfaces for the all POJO's and in the process did not define an interface or service contract for the service providers, against which implementations or so called realizations and mocks could be implemented against.
 
-Further more the integration team used @EJB annotations, the old Java EE annotations for dependency injection, instead of @Injection annotations, which is the newer CDI public standard annotations.
+Further more the integration team used @EJB annotations, the old Java EE annotations for dependency injection, instead of @Injection annotations, which is the newer CDI public standard annotations. An example of this can be seen where the integration team injected objects to do their REST wrapping.
 
 As the integration team is using the Glassfish application server, the application server allows for maintainability through the use of dependency injection through interfaces.  However for this to work, the beans should be implemented against an interface, which the integration team failed to do, as the bean consists of only a class which derives from the java.lang.Object object. The way in which the integration team implemented their system is a cause of concern for maintainability and hot deployment, the reason being that other submodules will need to depend directly on the bean object instead of the specified service contract interface.
+
+Futhermore the felxibility requirements specified that the access channels need to be exchangeable.
+This is avaiable since the system provides restful web services that can be acces via a variety of front end applications. 
+It was also spesified that the persistence and reporting frameworks should be changeable in the future. Since the team partially implemented the JPA standard annotations for
+the the persistance it would be possible to change the ORM that is used on the server in the future. However the Reporting framework was not implemented correctly at all.
 
 \subsubsection{Maintainability}
 The Java EE reference architecture has various open standards which has at least one open source implementation for an application server. This will allow for future maintainability and hence satisfies the required criteria.  Further more the lack of implementing beans against a service contract, will increase the difficulty and cost of maintaining the source base.
