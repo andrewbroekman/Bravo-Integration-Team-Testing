@@ -316,6 +316,10 @@ The integration testing also doesn't extend to testing the database including th
 \subsubsection{Usability}
 The majority of this sections responsibilities lies with the two front end modules. It is however worth noting that the system is currently only avaiable in english and not in Afrikaans and Sepedi as well.
 
+\subsubsection{Integrability}
+Since the backend of the system was developed by combining 4 separate submodules(Publications, People, Notifications and Reporting) it was ensured that all use cases which
+are available to human users are also accessible from external systems, which was a requirement.
+
 \subsubsection{Deployability}
 As the system is developed in Java, the system will be able to run on Linux servers as required by the specification, since the Java Runtime Environment is available for the Linux Operating System.  However the specification required that the application should be deployable as a Docker container,
 which is not implemented by the integration team.  Hence the integration team has succeeded in partially fulfilling this requirement.
