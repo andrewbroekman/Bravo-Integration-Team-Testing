@@ -1,4 +1,4 @@
-X\documentclass[a4paper,10pt]{article}
+\documentclass[a4paper,10pt]{article}
 \usepackage[margin=2cm]{geometry}
 \usepackage{graphicx}
 \usepackage{hyperref}
@@ -389,6 +389,43 @@ properly support \textit{transactions}.
       The team succesfully utilized Ember.js and all of its components. They unfortunately did not complete all the pages, and did not successfully implement all tactics such as virtual dom, amp and caching, but they utilixed the most important aspect which is templates. Most components within Ember.js that address the responsibilites has not been met as they do not have a fully working system.
     \subsubsection{Concepts and Constraints for application components}
       The team has successfully implemented the MVC framework which Ember requires to use, such as the Models created, the Templates used and the Controller which does not connect directly to ORM but rather through REST points.
+
+\section{Mobile Application Framework}
+  \subsection{Architecture Requirements}
+    The team adheared to the public standard and open-source implementation of their RESTful services. Thus it will be easily maintained and itegrated.
+  \subsection{Architecture Design}
+    The team implemented their RESTful services almost perfectly to the desing that is stipulated with Jersey, ie grouping the Peoples services into a PeoplesResource class, then defining POST, GET and PUT actions. They include all their JSON @Consumes where necessary, and JSON @Produces, but where they fell short is defining the paths within the resource and specifically with GET. The implementation required was @Path("{id}"), the retrieving the object from the ID, they however are expecting the object to to passed through the request header.
+
+
+\section{Web Application Framework}
+  \subsection{Architecture Requirements}
+    \subsubsection{Access and Integration Requirements}
+  	The mobile application was not viewable from multiple contexts. It did not render on any Android device  emulator nor was viewable from any phone. There was implementation of REST API but no backend services meant that this what functionality existed was as a result of the provision of mocked REST objects. 
+    \subsubsection{Quality Requirements}
+    There were a number of quality requirements issues present:
+    \begin{enumerate}
+	\item The application was not useable at all.
+	\item The application was developed using the Gradle build system with    Android Studio specifically being the development environment. This does mean that the system could in theory, support maintainability as future teams would have easy access to all of the resources needed to maintain the system.
+	\item The android API selected was 6.0 or API level 23. While this is the very latest version possible, it is also the least flexible because the fewest number of mobile devices currently support it.
+	
+	\item The performance of a non-functioning application cannot be accurately gauged.
+    \end{enumerate}
+    \subsubsection{Architectural Responsibilities}
+    The primary architectural responsibility, to implement a REST API querying system, to ensure a stateless client, was not met. As such, no services could have been accessible to the mobile client nor processed. What was evident,however,was local capacity to realise those services but again, that falls short of the initial requirement.
+    \subsubsection{Architectural Constraints}
+  \subsection{Architecture Design}
+    \subsubsection{Tactics}
+      \begin{itemize}
+        \item Caching
+        \item Templating
+        \item Pre Compilation
+        \item Automatic Model Population
+        \item Virtual DOM
+      \end{itemize}
+    \subsubsection{Frameworks and Technologies}
+    \subsubsection{Concepts and Constraints for application components}
+
+
 
 \section{Reporting}
 The current code base of the support research system currently has no reporting functionality, hence the architecture specification of needing to use Jasper Reports for reporting has not been satisfied.
